@@ -21,10 +21,10 @@
     </div>
 <div class="p-5 mb-4 bg-light rounded-3">
     <div class="container-fluid py-5">
-        <form action="">
+        <form action="" method="POST">
+            {% csrf_token %}
             <h1 class="display-5 fw-bold">Город</h1>
-            <input type="text" id="city" class="form-control" name="city" placeholder="Введите город">
-            <input type="submit" name="send" value="Посмотреть прогноз" class="mt-2 btn btn-warning">
+            {{form.name}}
         </form>
     </div>
 </div>
@@ -32,6 +32,7 @@
     <div class="col-md-6">
         <div class="h-100 p-5 text-white bg-dark rounded-3">
             <div class="alert alert-danger">
+                {% for info in all_info %}
                 <h2>Погода в городе </h2>{{info.city}}
                 <p>
                     <script language="javascript" type="text/javascript"><!--
@@ -50,6 +51,7 @@
                 </p>
                 <b>Температура</b>{{info.temp}}<sup>0</sup>
                 <img src="https://openweathermap.org/img/w/{{info.icon}}.png" alt="Фото погоды" class="img-thunbnail">
+            {% endfor %}
             </div>
         </div>
     </div>
@@ -76,5 +78,6 @@ document.write(day[d.getDay()]+" " +d.getDate()+ " " + month[d.getMonth()]
         </div>
     </div>
 </div>
+
 </body>
 </html>
